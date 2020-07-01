@@ -9,7 +9,7 @@ export function SetPasswordView() {
 
   return (
     <form onSubmit={_handleSubmit}>
-      <div>
+      <fieldset>
         <div>
           <label>Email</label>
         </div>
@@ -20,7 +20,7 @@ export function SetPasswordView() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </div>
+      </fieldset>
       <button type="submit">Submit</button>
     </form>
   );
