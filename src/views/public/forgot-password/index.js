@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function ForgotPasswordView() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   function _handleSubmit(e) {
     e.preventDefault();
@@ -10,7 +10,7 @@ export function ForgotPasswordView() {
 
   return (
     <form onSubmit={_handleSubmit}>
-      <div>
+      <fieldset>
         <div>
           <label htmlFor="view-forgotPassword--email">Email</label>
         </div>
@@ -19,10 +19,10 @@ export function ForgotPasswordView() {
           type="email"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           required
         />
-      </div>
+      </fieldset>
       <button type="submit">Submit</button>
       <ul>
         <li>
