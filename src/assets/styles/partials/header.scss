@@ -1,0 +1,29 @@
+#app-header {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  nav,
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+    }
+    a {
+      padding: 5px;
+    }
+  }
+  .app-header--logo {
+    a {
+      display: block;
+      line-height: 1;
+    }
+    img {
+      border-radius: 100%;
+    }
+  }
+  .app-header--navigation {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
