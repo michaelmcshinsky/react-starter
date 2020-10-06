@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <fieldset>
+    <div>
+      <label
+        htmlFor="view-login--email"
+      >
+        Email
+        <input
+          id="view-login--email"
+          name="email"
+          onChange={[Function]}
+          required={true}
+          type="email"
+          value=""
+        />
+      </label>
+    </div>
+    <div>
+      <label
+        htmlFor="view-login--password"
+      >
+        Password
+        <input
+          id="view-login--password"
+          name="password"
+          onChange={[Function]}
+          required={true}
+          type="password"
+          value=""
+        />
+      </label>
+    </div>
+  </fieldset>
+  <button
+    type="submit"
+  >
+    Login
+  </button>
+  <ul>
+    <li>
+      <a
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </li>
+    <li>
+      <a
+        href="/forgot-password"
+        onClick={[Function]}
+      >
+        Forgot Password
+      </a>
+    </li>
+  </ul>
+</form>
+`;

@@ -1,3 +1,3 @@
-export * from './account';
-export * from './dashboard';
-export * from './profile';
+export * from './Account';
+export * from './Dashboard';
+export * from './Profile';
