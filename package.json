@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/michaelmcshinsky/react-starter",
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "custom-env": "^2.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
