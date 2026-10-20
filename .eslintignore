@@ -1,6 +1,0 @@
-.storybook/
-__tests__
-dist/
-node_modules/
-src/assets/
-**/README.md
