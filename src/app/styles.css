@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+body {
+  @apply bg-white text-gray-900 antialiased;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+}
