@@ -187,7 +187,7 @@ mkdir -p src/features/my-feature/{components,hooks}
 
 ### Deploy
 ```bash
-# Static hosting (Vercel, Netlify, Cloudflare Pages, Surge)
+# Static hosting (Vercel, Netlify, Cloudflare Workers, Surge)
 npm run build
 # Deploy dist/ folder
 

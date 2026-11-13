@@ -38,7 +38,7 @@ npm install
 ### Deploy / provision
 
 - `npm run build`; publish as a GitHub template or npm package.
-- Storybook: `npm run build-storybook` (static Pages if hosted).
+- Storybook: `npm run build-storybook` (static Worker if hosted).
 
 ## Verify
 
