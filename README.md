@@ -77,7 +77,7 @@ src/
 | **Zod-validated `import.meta.env`** | Fails at boot (not runtime) if required vars missing or malformed. Type-safe `env` object everywhere via `shared/config`. |
 | **TanStack Query as server-state layer** | Separates server state from client state. Devtools, caching, deduping, retries, prefetching — all configured once in `shared/providers`. |
 | **Tailwind CSS 4 via `@tailwindcss/vite`** | Zero-config, lightning-fast, native Vite integration. No PostCSS config needed. |
-| **Vitest + Testing Library + jsdom** | Fast, React-native testing. `shared/test/render.tsx` wraps providers so every test gets QueryClient, Router, Theme. |
+| **Vitest + Testing Library + jsdom** | Fast, React-native testing. Tests compose providers (QueryClient, MemoryRouter) via small local helpers. |
 
 ---
 
@@ -86,11 +86,14 @@ src/
 ### Features Included
 - **Home** — Hero, feature grid, navigation to About
 - **About** — Static content page demonstrating lazy route loading
-- **Error Boundary Demo** — Trigger a render error to see the fallback in action
+- **Error Boundary** — Wraps the router; resettable fallback on render errors (see the `WithError` Storybook story)
 
-### Ready-to-Extend Patterns (Copy-Paste Starting Points)
-| Pattern | Location | Use For |
-|---------|----------|---------|
+### Suggested Patterns (build these as your first features)
+These are conventions to copy, not shipped files — create them in the
+locations shown when you need them.
+
+| Pattern | Suggested Location | Use For |
+|---------|--------------------|---------|
 | **Auth stub** | `features/auth/` (create it) | Login/register forms, protected routes, token refresh |
 | **Data table** | `shared/components/DataTable.tsx` | Sortable, filterable, paginated server-driven tables |
 | **Zod form** | `shared/components/ZodForm.tsx` | Type-safe forms with schema validation + error display |
@@ -110,10 +113,10 @@ src/
 | Routing | React Router (lazy routes) | 7 |
 | Styling | Tailwind CSS (`@tailwindcss/vite`) | 4 |
 | Server State | TanStack Query | 5 |
-| Config Validation | Zod | 3 |
-| Testing | Vitest + Testing Library + jsdom | 2 |
+| Config Validation | Zod | 4 |
+| Testing | Vitest + Testing Library + jsdom | 5 |
 | Component Explorer | Storybook | 8 |
-| Linting | ESLint 9 flat + typescript-eslint | 9 |
+| Linting | ESLint flat config + typescript-eslint | 10 |
 | Package Manager | npm (works with pnpm/yarn) | — |
 
 ---
@@ -159,7 +162,7 @@ npm run build -- --mode=production
 **Required env vars** (validated at boot):
 ```env
 VITE_API_URL=https://api.example.com
-VITE_APP_NAME=My App
+VITE_APP_TITLE=My App
 ```
 
 ---
@@ -171,7 +174,7 @@ VITE_APP_NAME=My App
 # 1. Create feature folder
 mkdir -p src/features/my-feature/{components,hooks}
 
-# 2. Add route (lazy-loaded) in src/app/router.tsx
+# 2. Add route (lazy-loaded) in src/app/App.tsx
 { path: '/my-feature', element: <LazyMyFeature /> }
 
 # 3. Write components, hooks, types, API calls
@@ -183,7 +186,7 @@ mkdir -p src/features/my-feature/{components,hooks}
 1. Create `src/features/auth/` with `LoginForm`, `RegisterForm`, `useAuth` hook
 2. Add `AuthProvider` in `shared/providers/AuthProvider.tsx` wrapping `QueryClientProvider`
 3. Protect routes with `<RequireAuth>` wrapper component
-4. Add token refresh logic in `shared/api/client.ts` interceptors
+4. Add token refresh logic in your API client (`shared/api/client.ts` once created)
 
 ### Deploy
 ```bash
