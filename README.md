@@ -9,7 +9,7 @@
 [![Storybook](https://img.shields.io/badge/Storybook-8-FF4785?style=flat-square&logo=storybook&logoColor=white)](https://storybook.js.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-> **Live demo:** [react-starter.mcshinsky.net](https://react-starter.mcshinsky.net) • **Storybook:** [react-starter.mcshinsky.net/storybook](https://react-starter.mcshinsky.net/storybook)
+> **Demo:** The hosted demo at `react-starter.mcshinsky.net` is currently offline (DNS removed 2026-11). See [Deploy](#extending-common-first-steps) below to restore it, or run locally: `npm install && npm run dev`.
 
 Production-ready, opinionated Vite + React 19 + TypeScript starter with Tailwind CSS 4, TanStack Query, Vitest, and Storybook 8. Built for teams shipping real products — not hello-world demos.
 
@@ -189,12 +189,38 @@ mkdir -p src/features/my-feature/{components,hooks}
 4. Add token refresh logic in your API client (`shared/api/client.ts` once created)
 
 ### Deploy
-```bash
-# Static hosting (Vercel, Netlify, Cloudflare Workers, Surge)
-npm run build
-# Deploy dist/ folder
 
-# Docker
+The project ships with `public/_redirects` (SPA fallback), which Netlify and
+Cloudflare Pages both honor automatically.
+
+```bash
+npm run build
+# Deploy the dist/ folder
+```
+
+**Cloudflare Pages** (recommended — same provider as `mcshinsky.net` DNS):
+1. Pages project → connect this GitHub repo.
+2. Build command: `npm run build` · Output directory: `dist`.
+3. Custom domain: add `react-starter.mcshinsky.net` under the project's Custom
+   domains; Cloudflare creates the DNS record automatically.
+4. To serve Storybook at `/storybook`: build it (`npm run build-storybook` →
+   `storybook-static/`) and either deploy it as a second Pages project on a
+   subdomain (e.g. `storybook.react-starter.mcshinsky.net`) or copy
+   `storybook-static/` into `dist/storybook/` in a post-build step and add
+   `/storybook/* /storybook/index.html 200` above the catch-all in
+   `public/_redirects`.
+
+**Netlify:**
+1. `netlify deploy --prod --dir=dist` after `npm run build`, or connect the repo
+   in the Netlify dashboard (build: `npm run build`, publish: `dist`).
+2. Add `react-starter.mcshinsky.net` as a custom domain in site settings.
+
+**Any static host** (Vercel, GitHub Pages, Surge, S3+CDN): build, then upload
+`dist/`; configure the host's SPA rewrite to `index.html` if it does not read
+`_redirects`.
+
+**Docker**
+```bash
 docker build -t my-app .
 docker run -p 8080:80 my-app
 ```
@@ -203,8 +229,7 @@ docker run -p 8080:80 my-app
 
 ## 📚 Learn More
 
-- **[Architecture Deep-Dive](https://mcshinsky.net/work/react-starter-architecture/)** — Why feature folders, how TanStack Query integrates, error boundary patterns
-- **[Decisions Log](DECISIONS.md)** — Every major choice with tradeoffs and alternatives considered
+- **[Architecture & Decisions](DECISIONS.md)** — Why feature folders, lazy routes, TanStack Query, and the error boundary; every major choice with tradeoffs (the previous hosted deep-dive article is offline)
 - **[Contributing](CONTRIBUTING.md)** — Branch strategy, commit conventions, PR requirements
 - **[Security](SECURITY.md)** — Vulnerability reporting, dependency policy
 
